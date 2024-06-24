@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>music</title>
+    <style>
+      *{
+        --main-c:rgb(18, 18, 18);
+        --secendery-c:rgb(131, 147, 161);
+        --special-c:rgb(132, 217, 224);
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+      }
+      p{
+        margin: 0;
+      }
+      body {
+        margin: 0;
+        
+      }
+      .home-screen{
+        background-color: black;
+        width: 100%;
+        height: 200vh;
+        border:none;
+        box-sizing: border-box;
+        overflow: hidden;
+        position: relative;
+        > #background-img{
+          filter: blur(3px) brightness(.3) saturate(.4);
+          position: absolute;
+          width: 100%;
+          height: 100%;
+        }
+      }
+      #nav-bar{
+        position: relative;
+        top: 0;
+        width: 100vw;
+        height: 95px;
+        background-color: transparent;
+        box-sizing: border-box;
+      }
+      #side-menu-b{
+        width: 56px;
+        vertical-align: middle;
+        margin: 15px; 
+        top: 0;
+        background-color: transparent;
+        border: none;
+        aspect-ratio: 1/1;
+        position: absolute;
+        transition: margin .14s ease-out;
+        &.open{
+          > #uper-line{
+            background-color: var(--secendery-c);
+            transform: translate(0,0);
+            transform: rotate(135deg);
+            width:44px;
+          }
+          > #down-line{
+            background-color: var(--secendery-c);
+            transform: translate(0,0);
+            transform: rotate(45deg );
+            width:44px;
+          }
+          margin-left: 210px;
+        }
+        &.close{
+          margin-left: 15px;
+          > #uper-line{
+            transform: translate(0,-7px);
+            width:44px;
+          }
+          > #down-line{
+            transform: translate(0,8px);
+            width:30px;
+          }
+        }
+      }
+
+      #uper-line{
+        transform: translate(0,-7px);
+        width:44px;
+      }
+      #down-line{
+        transform: translate(0,8px);
+        width:30px;
+      }
+      .line{
+        height:3.8px;
+        border-radius: 3px;
+        object-position: center;
+        transform: rotate(0deg);
+        background-color: var(--secendery-c);
+        transition: width .1s, transform .14s ease-out, background-color .2s;
+      }
+
+
+      #search-b{
+        width: 56px;
+        vertical-align: middle;
+        margin: 17px;
+        left: 0;
+        margin-left: 90px;
+        mask: url(search.png) no-repeat center / contain;
+        background-color: var(--secendery-c);
+        aspect-ratio: 1/1;
+        position: absolute;
+        transition: margin .14s ease-out;
+        &.open{
+          margin-left: 305px;
+        }
+        &.close{
+          margin-left: 90px;
+        }
+      }
+      #acount-b{
+        width: 56px;
+        right: 0;
+        margin: 18px;
+        vertical-align: middle;
+        mask: url(acount.png) no-repeat center / contain;
+        background-color: var(--secendery-c);
+        aspect-ratio: 1/1;
+        position: absolute;
+      }
+
+      #side-menu-div{
+        position: absolute;
+        width: 100vw;
+        height: 200vh;
+        top: 0;
+        box-sizing: border-box;
+        backdrop-filter: blur(0px);
+        transform: translate(-100vw,0);
+        background-color: transparent;
+        transition: transform .14s ease-out, backdrop-filter .4s ease-out;
+        &.open{
+          transform: translate(0vw,0);
+          backdrop-filter: blur(2px);
+        }
+        &.close{
+          transform: translate(-100vw,0);
+          backdrop-filter: blur(0px);
+        }
+        > #side-menu{
+          box-sizing: border-box;
+          display: flex;
+          border: none;
+          border-width: 0;
+          border-style: solid;
+          border-right-width: 3px;
+          border-color: rgb(53, 53, 53);
+          flex-direction: column;
+          padding-left: 9px;
+          position: absolute;
+          width: 290px;
+          height: 100%; 
+          background-color: var(--main-c);
+          backdrop-filter: blur(3px) brightness(.8);
+        }
+      }
+      
+      .side-menu-buttons{
+        background-color: var(--main-c);
+        font-size: 36px;
+        width: 86%; 
+        height: 70px;
+        padding-left: 12px;
+        margin-bottom: 10px;
+        border-radius: 8px;
+        border-style: solid;
+        position: relative;
+        border-color: rgb(43, 43, 43);
+        text-align: left;
+        color: var(--secendery-c);
+      }
+
+      .album-card{
+        width: 100%;
+        height: 100%;
+        max-width: 220px;
+        position: relative;
+        background-color: var(--main-c);
+        transform: scale(1);
+        transition: transform .3s;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-radius: 13px;
+        border-width: 4px;
+        border-style: solid;
+        border-color: var(--secendery-c);
+        box-sizing: border-box;
+        opacity: .9;
+        overflow: hidden;
+        &:active{
+          transform: scale(.92);
+        }
+        >#album-card-img{
+          position: relative;
+          border-style: solid;
+          border-width: 0px;
+          width: 100%;
+          height: 56%;
+          box-sizing: border-box;
+          aspect-ratio: 1/1;
+          object-fit: cover;
+        }
+      }
+
+      .main-area{
+        position: relative;
+        padding: 14px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        width: 100vw;
+        height: 200vh; /* Adjust the height as needed */
+      }
+      .albums-area{
+        position: relative;
+        width: 100%;
+        height: 1000px; /* Adjust the height as needed */
+        border: none;
+        box-sizing: border-box;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Adjust column size based on available space */
+        grid-template-rows: repeat(auto-fill, 270px); /* Determine rows based on height */
+        grid-gap: 14px; /* This sets both column and row gap */
+        justify-content: space-evenly; /* Evenly distribute columns */
+        align-content: start; /* Evenly distribute rows */
+        justify-items: center; /* Center items horizontally */
+        align-items: center; /* Center items vertically */
+      }
+
+    </style>
+  </head>
+  
+  <body>
+
+    <div class="home-screen">
+      
+      <img id="background-img" src="back.jpg">
+      
+      <div id="nav-bar">
+        <div style="width: 100%;height: 100%;box-sizing: border-box;background-color:var(--main-c);position: absolute;"></div>
+        <button id="search-b"></button>
+        <button id="acount-b"></button>
+      </div>  
+      <div>
+      <div class="main-area">
+        
+        <p style="width: 100%;height: 60px;font-weight: 400; color:var(--special-c);font-size: 40px;box-shadow: 10px; position: relative;box-sizing: border-box;vertical-align: middle;">Albums</p>
+        <div class="albums-area">
+          <div class="album-card">
+            <img src="pand.png" id="album-card-img">
+          </div>
+          <div class="album-card">
+
+          </div>
+          <div class="album-card">
+
+          </div>
+          <div class="album-card">
+
+          </div>
+          <div class="album-card">
+
+          </div>
+          <div class="album-card">
+
+          </div>
+        </div>
+
+      </div>
+
+      <div id="side-menu-div">
+        <div id="side-menu">
+          <p style="position: relative; font-size: 45px;font-weight: 400; color: var(--special-c);margin-bottom: 26px;margin-left: 20px; margin-top: 13px;">Menu</p>
+          <button class="side-menu-buttons">search</button>
+          <button class="side-menu-buttons">favorates</button>
+          <button class="side-menu-buttons">albums</button>
+        </div>
+      </div>
+      <button id="side-menu-b" onclick="open_close()">
+        <div id="uper-line" class="line"></div>
+        <div id="down-line" class="line"></div> 
+      </button>   
+    </div>
+
+
+
+
+    <script>
+
+      const side_menu = document.getElementById('side-menu-div');
+      const search_b = document.getElementById('search-b');
+      const side_menu_b = document.getElementById('side-menu-b');
+      var is_menu_opened = false;
+      function open_close(){
+        if (side_menu.classList.contains('open')) {
+          side_menu.classList.remove('open');
+          side_menu.classList.add('close');
+        } else {
+          side_menu.classList.remove('close');
+          side_menu.classList.add('open');
+        }
+        if (search_b.classList.contains('open')) {
+          search_b.classList.remove('open');
+          search_b.classList.add('close');
+        } else {
+          search_b.classList.remove('close');
+          search_b.classList.add('open');
+        }
+        if (side_menu_b.classList.contains('open')) {
+          side_menu_b.classList.remove('open');
+          side_menu_b.classList.add('close');
+        } else {
+          side_menu_b.classList.remove('close');
+          side_menu_b.classList.add('open');
+        }
+      }
+
+    </script>
+  </body>
+
+  <footer></footer>
+</html>
