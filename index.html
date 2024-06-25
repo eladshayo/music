@@ -16,12 +16,32 @@
       }
       body {
         margin: 0;
-        
+      
       }
+      /* width */
+      ::-webkit-scrollbar {
+        width: max(min(1vw,10px),5px);
+      }
+
+      /* Track */
+      ::-webkit-scrollbar-track {
+        background: var(--main-c);
+      }
+
+      /* Handle */
+      ::-webkit-scrollbar-thumb {
+        background: var(--secendery-c);
+        border-radius: 8px;
+        /* border-top-left-radius: 0;
+        border-top-right-radius: 0; */
+      }
+
+      
+
       .home-screen{
         background-color: black;
         width: 100%;
-        height: 200vh;
+        height: fit-content;
         border:none;
         box-sizing: border-box;
         overflow: hidden;
@@ -177,9 +197,39 @@
         color: var(--secendery-c);
       }
 
+      .main-area{
+        position: relative;
+        padding: 24px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        /* background-color: blue; */
+        height: fit-content; /* Adjust the height as needed */
+      }
+
+      .albums-area,.songs-area{
+        position: relative;
+        width: 100%;
+        height: fit-content; /* Adjust the height as needed */
+        border: none;
+        /* background-color: blueviolet; */
+        box-sizing: border-box;
+        display: grid;
+        grid-template-columns: repeat(auto-fit,minmax(190px, 1fr));
+        grid-template-rows: 250px;
+        grid-gap: 14px; /* This sets both column and row gap */
+        justify-content: start; /* Evenly distribute columns */
+        align-content: start; /* Evenly distribute rows */
+        justify-items: center; /* Center items horizontally */
+        align-items: center; /* Center items vertically */
+        margin-bottom: 16px;
+      }
+
       .album-card{
         width: 100%;
         height: 100%;
+        max-height: 260px;
         max-width: 220px;
         position: relative;
         background-color: var(--main-c);
@@ -209,31 +259,71 @@
           aspect-ratio: 1/1;
           object-fit: cover;
         }
+        >#album-card-title{
+          color: var(--special-c);
+          padding: 4px;
+          margin-top: max(6px,3.5%);
+          font-size: 24px;
+          box-sizing: border-box;
+        }
+        >#album-card-text{
+          color: var(--secendery-c);
+          padding: 4px;
+          box-sizing: border-box;
+          text-align: center;
+        }
       }
-
-      .main-area{
+      .song-card{
+        width: 100%;
+        height: 100%;
+        max-width: 220px;
+        max-height: 260px;
         position: relative;
-        padding: 14px;
-        box-sizing: border-box;
+        background-color: var(--main-c);
+        transform: scale(1);
+        transition: transform .3s;
+        margin: 0;
         display: flex;
         flex-direction: column;
-        width: 100vw;
-        height: 200vh; /* Adjust the height as needed */
-      }
-      .albums-area{
-        position: relative;
-        width: 100%;
-        height: 1000px; /* Adjust the height as needed */
-        border: none;
+        align-items: center;
+        border-radius: 13px;
+        border-width: 4px;
+        border-style: solid;
+        border-color: var(--secendery-c);
         box-sizing: border-box;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Adjust column size based on available space */
-        grid-template-rows: repeat(auto-fill, 270px); /* Determine rows based on height */
-        grid-gap: 14px; /* This sets both column and row gap */
-        justify-content: space-evenly; /* Evenly distribute columns */
-        align-content: start; /* Evenly distribute rows */
-        justify-items: center; /* Center items horizontally */
-        align-items: center; /* Center items vertically */
+        opacity: .9;
+        overflow: hidden;
+        &:active{
+          transform: scale(.92);
+        }
+        #song-card-img{
+          position: relative;
+          border-style: solid;
+          border-width: 0px;
+          width: 100%;
+          height: 56%;
+          box-sizing: border-box;
+          aspect-ratio: 1/1;
+          object-fit: cover;
+        }
+        #song-card-title{
+          color: var(--special-c);
+          padding: 4px;
+          height: 30%;
+          margin-top: max(6px,3.5%);
+          font-size: 20px;
+          box-sizing: border-box;
+          text-align: start;
+        }
+        #song-card-text{
+          color: var(--secendery-c);
+          padding: 4px;
+          height: 60%;
+          font-size: 76%;
+          font-weight: 300;
+          box-sizing: border-box;
+          text-align: start;
+        }
       }
 
     </style>
@@ -253,38 +343,108 @@
       <div>
       <div class="main-area">
         
-        <p style="width: 100%;height: 60px;font-weight: 400; color:var(--special-c);font-size: 40px;box-shadow: 10px; position: relative;box-sizing: border-box;vertical-align: middle;">Albums</p>
+        <p style="width: 100%;height: 60px;font-weight: 400; color:var(--special-c);font-size: 40px;box-shadow: 10px; position: relative;box-sizing: border-box;vertical-align: middle;margin-bottom: 8px;">Recent Albums</p>
         <div class="albums-area">
           <div class="album-card">
+            <img src="pand3.png" id="album-card-img">
+            <p id="album-card-title">pashosh</p>
+            <p id="album-card-text">pashoshim hamudim meod vegam hamusim hamudim</p>
+          </div>
+          <div class="album-card">
+            <img src="pand2.png" id="album-card-img">
+            <p id="album-card-title">pashosh</p>
+            <p id="album-card-text">pashoshim hamudim meod vegam hamusim hamudim</p>
+          </div>
+          <div class="album-card">
+            <img src="pand2.png" id="album-card-img">
+            <p id="album-card-title">pashosh</p>
+            <p id="album-card-text">pashoshim hamudim meod vegam hamusim hamudim</p>
+          </div>
+          <div class="album-card">
             <img src="pand.png" id="album-card-img">
+            <p id="album-card-title">pashosh</p>
+            <p id="album-card-text">pashoshim hamudim meod vegam hamusim hamudim</p>
           </div>
           <div class="album-card">
-
+            <img src="pand3.png" id="album-card-img">
+            <p id="album-card-title">pashosh</p>
+            <p id="album-card-text">pashoshim hamudim meod vegam hamusim hamudim</p>
           </div>
-          <div class="album-card">
+          
+        </div>
 
+        <p style="width: 100%;height: 60px;font-weight: 400; color:var(--special-c);font-size: 40px;box-shadow: 10px; position: relative;box-sizing: border-box;vertical-align: middle;margin-bottom: 8px;">Recent Songs</p>
+        <div class="songs-area">
+          <div class="song-card">
+            <img src="pand2.png" id="song-card-img">
+            
+            <div style="display: flex;height: 44%;width: 100%;flex-shrink: 1;">
+              <button style="width: 40px;background-color: var(--special-c); aspect-ratio:1/1;border-radius: 50%;border:none;align-self:flex-end;margin: 14px;">
+                <img src="search.png" style="width: 100%;aspect-ratio: 1/1;transform: scale(.8);">
+              </button>
+              <div style="height: 100%;width: 50%;display: flex;flex-direction: column;">
+                <p id="song-card-title">pashosh</p>
+                <p id="song-card-text">pashoshim hamudim meod vegam hamusim hamudim</p>
+              </div>
+            </div>
+              
           </div>
-          <div class="album-card">
+          <div class="song-card">
+            <img src="pand.png" id="song-card-img">
+            
+            <div style="display: flex;height: 44%;width: 100%;flex-shrink: 1;">
+              <button style="width: 40px;background-color: var(--special-c); aspect-ratio:1/1;border-radius: 50%;border:none;align-self:flex-end;margin: 14px;">
+                <img src="search.png" style="width: 100%;aspect-ratio: 1/1;transform: scale(.8);">
+              </button>
+              <div style="height: 100%;width: 50%;display: flex;flex-direction: column;">
+                <p id="song-card-title">pashosh</p>
+                <p id="song-card-text">pashoshim hamudim meod vegam hamusim hamudim</p>
+              </div>
+            </div>
+              
+          </div>
+          <div class="song-card">
+            <img src="pand2.png" id="song-card-img">
+            
+            <div style="display: flex;height: 44%;width: 100%;flex-shrink: 1;">
+              <button style="width: 40px;background-color: var(--special-c); aspect-ratio:1/1;border-radius: 50%;border:none;align-self:flex-end;margin: 14px;">
+                <img src="search.png" style="width: 100%;aspect-ratio: 1/1;transform: scale(.8);">
+              </button>
+              <div style="height: 100%;width: 50%;display: flex;flex-direction: column;">
+                <p id="song-card-title">pashosh</p>
+                <p id="song-card-text">pashoshim hamudim meod vegam hamusim hamudim</p>
+              </div>
+            </div>
+              
+          </div>
+          <div class="song-card">
+            <img src="pand3.png" id="song-card-img">
+            
+            <div style="display: flex;height: 44%;width: 100%;flex-shrink: 1;">
+              <button style="width: 40px;background-color: var(--special-c); aspect-ratio:1/1;border-radius: 50%;border:none;align-self:flex-end;margin: 14px;">
+                <img src="search.png" style="width: 100%;aspect-ratio: 1/1;transform: scale(.8);">
+              </button>
+              <div style="height: 100%;width: 50%;display: flex;flex-direction: column;">
+                <p id="song-card-title">pashosh</p>
+                <p id="song-card-text">pashoshim hamudim meod vegam hamusim hamudim</p>
+              </div>
+            </div>
+              
+          </div>
 
-          </div>
-          <div class="album-card">
-
-          </div>
-          <div class="album-card">
-
-          </div>
         </div>
 
       </div>
 
-      <div id="side-menu-div">
+      <div id="side-menu-div" onclick="open_close()">
         <div id="side-menu">
           <p style="position: relative; font-size: 45px;font-weight: 400; color: var(--special-c);margin-bottom: 26px;margin-left: 20px; margin-top: 13px;">Menu</p>
-          <button class="side-menu-buttons">search</button>
+          <button class="side-menu-buttons">discover</button>
           <button class="side-menu-buttons">favorates</button>
           <button class="side-menu-buttons">albums</button>
         </div>
       </div>
+
       <button id="side-menu-b" onclick="open_close()">
         <div id="uper-line" class="line"></div>
         <div id="down-line" class="line"></div> 
